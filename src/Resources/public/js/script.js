@@ -248,7 +248,7 @@
 
                         // CPF informado exige nome
                         if (!nome) {
-                            alert('É necessário informar um nome ao digitar o CPF.');
+                            alert('É necessário informar um nome válido ao digitar o CPF.');
                             return reject();
                         }
 
