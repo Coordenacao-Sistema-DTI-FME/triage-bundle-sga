@@ -177,8 +177,65 @@
                 this.prioridadeModal.hide();
                 this.prioridade = null;
             },
+            // VERIFICADOR DE CPF
+            validarCPF(cpf) {
+                cpf = cpf.replace(/\D/g, '');
+
+                if (cpf.length !== 11) {
+                    return false;
+                }
+
+                // Impede CPFs com todos os dígitos iguais
+                if (/^(\d)\1{10}$/.test(cpf)) {
+                    return false;
+                }
+
+                // Primeiro dígito verificador
+                let soma = 0;
+
+                for (let i = 0; i < 9; i++) {
+                    soma += parseInt(cpf.charAt(i)) * (10 - i);
+                }
+
+                let resto = (soma * 10) % 11;
+
+                if (resto === 10) {
+                    resto = 0;
+                }
+
+                if (resto !== parseInt(cpf.charAt(9))) {
+                    return false;
+                }
+
+                // Segundo dígito verificador
+                soma = 0;
+
+                for (let i = 0; i < 10; i++) {
+                    soma += parseInt(cpf.charAt(i)) * (11 - i);
+                }
+
+                resto = (soma * 10) % 11;
+
+                if (resto === 10) {
+                    resto = 0;
+                }
+
+                if (resto !== parseInt(cpf.charAt(10))) {
+                    return false;
+                }
+
+                return true;
+            },
             distribuiSenha(servico, prioridade) {
                 return new Promise((resolve, reject) => {
+
+                    const cpf = this.cliente.documento || '';
+
+                     if (!this.validarCPF(cpf)) {
+                        alert('CPF inválido. Verifique o número informado.');
+                        return reject();
+                    }
+
                     if (this.cliente.documento && this.cliente.documento.length !== 11) {
                         alert('É necessário informar 11 dígitos no CPF para gerar uma senha.');
                         return reject();
