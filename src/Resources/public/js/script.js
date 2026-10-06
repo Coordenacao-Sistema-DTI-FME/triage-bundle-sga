@@ -179,8 +179,13 @@
             },
             distribuiSenha(servico, prioridade) {
                 return new Promise((resolve, reject) => {
-                     if (this.cliente.documento && this.cliente.documento.length !== 11) {
+                    if (this.cliente.documento && this.cliente.documento.length !== 11) {
                         alert('É necessário informar 11 dígitos no CPF para gerar uma senha.');
+                        return reject();
+                    }
+
+                    if (this.cliente.documento && this.cliente.nome == '') {
+                        alert('É necessário informar um nome ao digitar o cpf.');
                         return reject();
                     }
 
