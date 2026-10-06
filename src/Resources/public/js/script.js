@@ -229,21 +229,28 @@
             distribuiSenha(servico, prioridade) {
                 return new Promise((resolve, reject) => {
 
-                    const cpf = this.cliente.documento || '';
+                    const cpf = (this.cliente.documento || '').replace(/\D/g, '');
+                    const nome = (this.cliente.nome || '').trim();
 
-                     if (!this.validarCPF(cpf)) {
-                        alert('CPF inválido. Verifique o número informado.');
-                        return reject();
-                    }
+                     if (cpf) {
 
-                    if (this.cliente.documento && this.cliente.documento.length !== 11) {
-                        alert('É necessário informar 11 dígitos no CPF para gerar uma senha.');
-                        return reject();
-                    }
+                        // CPF precisa ter exatamente 11 dígitos
+                        if (cpf.length !== 11) {
+                            alert('É necessário informar 11 dígitos no CPF para gerar uma senha.');
+                            return reject();
+                        }
 
-                    if (this.cliente.documento && this.cliente.nome == '') {
-                        alert('É necessário informar um nome ao digitar o cpf.');
-                        return reject();
+                        // CPF precisa ser válido
+                        if (!this.validarCPF(cpf)) {
+                            alert('CPF inválido. Verifique o número informado.');
+                            return reject();
+                        }
+
+                        // CPF informado exige nome
+                        if (!nome) {
+                            alert('É necessário informar um nome ao digitar o CPF.');
+                            return reject();
+                        }
                     }
 
                     if (this.pausado) {
