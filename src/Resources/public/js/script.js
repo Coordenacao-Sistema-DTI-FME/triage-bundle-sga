@@ -371,6 +371,11 @@
 
                 this.fetchClients();
             },
+            changeNome() {
+                this.cliente.nome = this.cliente.nome
+                    .replace(/[^a-zA-ZÀ-ÿ\s]/g, '')
+                    .replace(/\s{2,}/g, ' ');
+            },
             changeClient() {
                 const isDisabled = this.cliente.id;
                 this.cliente.id = null;

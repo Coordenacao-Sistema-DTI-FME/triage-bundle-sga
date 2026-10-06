@@ -51,7 +51,7 @@
                                 <i class="fa fa-user"></i>
                             </span>
                             <label for="cliente-nome" class="sr-only">{{ 'label.name'|trans }}</label>
-                            <input type="text" id="cliente-nome" class="form-control" maxlength="100" placeholder="{{ 'label.name'|trans }}" v-model="cliente.nome" :disabled="fetchingClientes || cliente.id" />
+                            <input type="text" id="cliente-nome" class="form-control" maxlength="100" placeholder="{{ 'label.name'|trans }}" v-model="cliente.nome" :disabled="fetchingClientes || cliente.id" v-on:input="changeNome" />
                         </div>
                     </div>
                 </div>
