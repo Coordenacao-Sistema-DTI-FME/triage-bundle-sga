@@ -251,6 +251,11 @@
                             alert('É necessário informar um nome ao digitar o CPF.');
                             return reject();
                         }
+
+                        if (nome && !/^[\p{L}\s]+$/u.test(nome)) {
+                            alert('O nome informado contém caracteres inválidos.');
+                            return reject();
+                        }
                     }
 
                     if (this.pausado) {
@@ -379,6 +384,7 @@
             changeClient() {
                 const isDisabled = this.cliente.id;
                 this.cliente.id = null;
+
                 const existingCliente = this.clientes.find((c) => c.documento === this.cliente.documento)
                 if (existingCliente) {
                     this.cliente.id = existingCliente.id;
