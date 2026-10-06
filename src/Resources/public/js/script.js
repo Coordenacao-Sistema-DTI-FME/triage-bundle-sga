@@ -290,8 +290,11 @@
                     }
                 })
             }, 400),
-            changeDocumento() {
-                this.cliente.documento = this.cliente.documento.toUpperCase();
+           changeDocumento() {
+                this.cliente.documento = this.cliente.documento
+                    .replace(/\D/g, '')
+                    .slice(0, 11);
+
                 this.fetchClients();
             },
             changeClient() {

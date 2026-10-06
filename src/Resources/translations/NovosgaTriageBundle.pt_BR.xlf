@@ -184,7 +184,7 @@
       </trans-unit>
       <trans-unit id="57">
         <source>label.customer.id</source>
-        <target>Cpf</target>
+        <target>CPF</target>
       </trans-unit>
       <trans-unit id="58">
         <source>label.description</source>
